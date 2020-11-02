@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Главная / Акции</h3>
+      <h3>Все пиццы</h3>
 
       <button @click="refresh" class="btn waves-effect waves-light btn-small">
         <i class="material-icons">refresh</i>
@@ -15,7 +15,7 @@
         :info="item.info"
         :price="item.price"
         :imgUrl="item.imgUrl"
-        :stockDate="item.stockDate"
+        :stockDate="item.stockDate || 'Истек'"
       />
     </div>
   </div>
@@ -26,16 +26,16 @@ import CardPizza from './CardPizza'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'Home',
+  name: 'AllPizza',
   computed: mapGetters(['getPizza']),
-  methods: {
-    refresh() {
-      this.$store.dispatch('getPizza', 'stock')
-    }
-  },
   components: { CardPizza },
   mounted() {
-    this.$store.dispatch('getPizza', 'stock')
+    this.$store.dispatch('getPizza', 'pizza')
+  },
+  methods: {
+    refresh() {
+      this.$store.dispatch('getPizza', 'pizza')
+    }
   }
 }
 </script>

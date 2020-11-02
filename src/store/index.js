@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './auth'
+import db from './db'
+import DBGet from './DBGet'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -19,6 +22,8 @@ export default new Vuex.Store({
     error: s => s.error
   },
   modules: {
-    auth
+    auth,
+    db,
+    DBGet
   }
 })
