@@ -54,7 +54,7 @@
           id="name"
           type="text"
           v-model.trim="name"
-          :class="{invalid: $v.name.$dirty && !$v.name.required}"
+          :class="{ invalid: $v.name.$dirty && !$v.name.required }"
         />
         <label for="name">Имя</label>
         <small
@@ -115,7 +115,7 @@ export default {
       }
       try {
         await this.$store.dispatch('register', formData)
-        this.$router.push('/')
+        await this.$router.push('/')
         // eslint-disable-next-line no-empty
       } catch (e) {}
     }
