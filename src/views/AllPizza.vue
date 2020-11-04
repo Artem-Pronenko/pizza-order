@@ -30,11 +30,11 @@ export default {
   computed: mapGetters(['getPizza']),
   components: { CardPizza },
   mounted() {
-    this.$store.dispatch('getPizza', 'pizza')
+    this.$store.dispatch('getPizzaFB', 'pizza')
   },
   methods: {
     refresh() {
-      this.$store.dispatch('getPizza', 'pizza')
+      this.$store.dispatch('getPizzaFB', 'pizza')
     }
   }
 }

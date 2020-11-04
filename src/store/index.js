@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import auth from './auth'
-import db from './db'
-import DBGet from './DBGet'
+import DBSet from '@/store/DBSet'
+import DBGet from '@/store/DBGet'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    error: null
+    error: null,
+    userId: ''
   },
   mutations: {
     setError(state, error) {
@@ -16,14 +17,20 @@ export default new Vuex.Store({
     },
     clearError(state) {
       state.error = null
+    },
+    user_id(state, userId) {
+      state.userId = userId
     }
   },
   getters: {
-    error: s => s.error
+    error: s => s.error,
+    UID(state) {
+      return state.userId
+    }
   },
   modules: {
     auth,
-    db,
+    DBSet,
     DBGet
   }
 })

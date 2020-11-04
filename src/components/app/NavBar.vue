@@ -5,7 +5,7 @@
         <a href="#" @click.prevent="$emit('clickMenu')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{date | date('datetime')}}</span>
+        <span class="black-text">{{ date | date('datetime') }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -50,7 +50,7 @@ export default {
   methods: {
     async logOut() {
       await this.$store.dispatch('logOut')
-      this.$router.push('/login?message=logOut')
+      await this.$router.push('/login?message=logOut')
     }
   },
   mounted() {

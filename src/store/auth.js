@@ -19,7 +19,6 @@ export default {
           .database()
           .ref(`/users/${uid}/info`)
           .set({
-            bill: 10000,
             name
           })
       } catch (e) {
@@ -27,9 +26,11 @@ export default {
         throw e
       }
     },
-    getUserId() {
+    getUserId(ctx) {
       const user = firebase.auth().currentUser
-      return user ? user.uid : null
+      const id = user ? user.uid : null
+      ctx.commit('user_id', user.uid)
+      return id
     },
     async logOut() {
       await firebase.auth().signOut()

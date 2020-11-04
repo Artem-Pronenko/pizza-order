@@ -32,7 +32,7 @@
         <div class="card-info">
           <p class="card-text">{{ info }}</p>
           <div class="buttons">
-            <button class="recipe btn">Заказать</button>
+            <button class="recipe btn" @click="addOrderUser">Заказать</button>
             <button @click="getPizzaComposition" class="recipe btn">
               Состав
             </button>
@@ -48,6 +48,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+//import message from '@/utils/message'
 export default {
   name: 'CardPizza',
   props: {
@@ -58,11 +59,16 @@ export default {
     stockDate: String
   },
   computed: {
-    ...mapGetters(['getComposition'])
+    ...mapGetters(['getName'])
   },
   data: () => ({
-    composition: []
+    composition: [],
+    userId: ''
   }),
+  async mounted() {
+    this.userId = await this.$store.dispatch('getUserId')
+    await this.$store.dispatch('getUserName', this.userId)
+  },
   methods: {
     async getPizzaComposition() {
       await this.$store
@@ -73,11 +79,28 @@ export default {
         .then(res => {
           this.composition = res.data().composition
         })
-        .then(() => {
-          setTimeout(() => {
-            this.composition.length = 0
-          }, 2000)
-        })
+    },
+    async addOrderUser() {
+      const options = {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+      }
+      const orderData = [
+        {
+          userName: this.getName,
+          userId: this.userId,
+          orderName: this.name,
+          price: this.price,
+          imgUrl: this.imgUrl,
+          date: new Intl.DateTimeFormat('ru-RU', options).format(new Date())
+        }
+      ]
+      await this.$store.dispatch('addOrder', orderData)
+      await this.$router.push('/history?message=addOrder')
     }
   }
 }
