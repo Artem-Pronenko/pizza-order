@@ -26,10 +26,13 @@ export default {
         throw e
       }
     },
-    getUserId(ctx) {
-      const user = firebase.auth().currentUser
+    async getUserId(ctx) {
+      const user = await firebase.auth().currentUser
+      console.log(user)
       const id = user ? user.uid : null
-      ctx.commit('user_id', user.uid)
+      if (id) {
+        ctx.commit('user_id', user.uid)
+      }
       return id
     },
     async logOut() {

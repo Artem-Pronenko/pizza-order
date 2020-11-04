@@ -2,6 +2,9 @@
   <div>
     <div class="page-title">
       <h3>История Заказов</h3>
+      <button @click="refresh" class="btn waves-effect waves-light btn-small">
+        <i class="material-icons">refresh</i>
+      </button>
     </div>
 
     <section>
@@ -25,6 +28,15 @@
           </div>
         </div>
       </div>
+      <h6 class="orange white-text card-history-warn" v-if="!UID">
+        Войдите или создайте акаунт
+      </h6>
+      <h6
+        class="orange white-text card-history-warn"
+        v-else-if="!cardInfo.length"
+      >
+        Пока что у вас нет заказов
+      </h6>
     </section>
   </div>
 </template>
@@ -47,7 +59,17 @@ export default {
     if (this.UID) {
       const cardInfo = await this.$store.dispatch('getPizzaOrder', this.UID)
       this.cardInfo.push(...cardInfo)
-      console.log(this.cardInfo)
+    } else {
+      await this.$store.dispatch('getUserId')
+    }
+  },
+  methods: {
+    async refresh() {
+      if (this.UID) {
+        this.cardInfo.length = 0
+        const cardInfo = await this.$store.dispatch('getPizzaOrder', this.UID)
+        this.cardInfo.push(...cardInfo)
+      }
     }
   }
 }
@@ -57,6 +79,7 @@ export default {
 .title-history {
   color: #8c8c8c;
 }
+
 .card-history {
   padding: 10px 20px;
   display: flex;
@@ -64,18 +87,24 @@ export default {
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 15px;
+  &-warn {
+    padding: 5px 10px;
+  }
   &-info {
     display: flex;
     flex-direction: column;
     font-size: 22px;
   }
+
   &-img {
     margin-right: 15px;
     max-width: 280px;
+
     & img {
       width: 100%;
     }
   }
+
   & .small {
     font-size: 16px;
   }

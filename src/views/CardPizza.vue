@@ -63,11 +63,13 @@ export default {
   },
   data: () => ({
     composition: [],
-    userId: ''
+    userId: null
   }),
   async mounted() {
     this.userId = await this.$store.dispatch('getUserId')
-    await this.$store.dispatch('getUserName', this.userId)
+    if (this.userId) {
+      await this.$store.dispatch('getUserName', this.userId)
+    }
   },
   methods: {
     async getPizzaComposition() {
@@ -99,6 +101,7 @@ export default {
           date: new Intl.DateTimeFormat('ru-RU', options).format(new Date())
         }
       ]
+      console.log(orderData)
       await this.$store.dispatch('addOrder', orderData)
       await this.$router.push('/history?message=addOrder')
     }
