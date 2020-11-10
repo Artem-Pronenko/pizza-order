@@ -16,6 +16,7 @@
         :price="item.price"
         :imgUrl="item.imgUrl"
         :stockDate="item.stockDate"
+        @remove-refresh="refresh"
       />
     </div>
   </div>

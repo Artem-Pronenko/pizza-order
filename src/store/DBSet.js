@@ -42,7 +42,18 @@ export default {
           .doc(`${object.name}`)
           .set(object)
       } catch (e) {
-        console.error(e)
+        throw new Error(e)
+      }
+    },
+    async deletePizza(ctx, object) {
+      try {
+        await firebase
+          .firestore()
+          .collection(`${object.collection}`)
+          .doc(`${object.name}`)
+          .delete()
+      } catch (e) {
+        throw new Error(e)
       }
     }
   }

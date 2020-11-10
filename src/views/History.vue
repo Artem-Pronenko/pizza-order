@@ -75,7 +75,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style scoped>
 .title-history {
   color: #8c8c8c;
 }
@@ -87,26 +87,28 @@ export default {
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 15px;
-  &-warn {
-    padding: 5px 10px;
-  }
-  &-info {
-    display: flex;
-    flex-direction: column;
-    font-size: 22px;
-  }
+}
 
-  &-img {
-    margin-right: 15px;
-    max-width: 280px;
+.card-history-warn {
+  padding: 5px 10px;
+}
 
-    & img {
-      width: 100%;
-    }
-  }
+.card-history-info {
+  display: flex;
+  flex-direction: column;
+  font-size: 22px;
+}
 
-  & .small {
-    font-size: 16px;
-  }
+.card-history-img {
+  margin-right: 15px;
+  max-width: 280px;
+}
+
+.card-history-img img {
+  width: 100%;
+}
+
+.card-history-info .small {
+  font-size: 16px;
 }
 </style>

@@ -15,7 +15,8 @@
         :info="item.info"
         :price="item.price"
         :imgUrl="item.imgUrl"
-        :stockDate="item.stockDate || 'Истек'"
+        :stockDate="item.stockDate || null"
+        @remove-refresh="refresh"
       />
     </div>
   </div>

@@ -104,6 +104,11 @@
           />
           <span>Акционная</span>
         </label>
+        <br />
+        <label v-if="collection">
+          Акция до:
+          <input v-model="dateStock" type="date" />
+        </label>
       </p>
 
       <button class="btn waves-effect waves-light" type="submit">
@@ -121,7 +126,8 @@ import {
   maxLength,
   maxValue
 } from 'vuelidate/lib/validators'
-import message from '@/utils/message';
+import message from '@/utils/message'
+
 export default {
   name: 'Record',
   data: () => ({
@@ -131,7 +137,8 @@ export default {
     collection: '',
     imgUrl: '',
     volume: '',
-    composition: ''
+    composition: '',
+    dateStock: ''
   }),
   validations: {
     name: { required, minLength: minLength(6), maxLength: maxLength(30) },
@@ -205,7 +212,8 @@ export default {
         collection: this.collection ? 'stock' : 'pizza',
         imgUrl: this.imgUrl,
         composition: compositionArr,
-        volume: +this.volume
+        volume: +this.volume,
+        stockDate: this.dateStock
       }
       this.$store.dispatch('addedPizza', dataObj).then(() => {
         this.name = ''

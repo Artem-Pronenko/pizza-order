@@ -1,5 +1,6 @@
 <template>
-  <div class="col s12 m10 l8">
+  <div class="col s12 m10 l8 card-wrapper">
+    <button v-if="admin" @click="deletePizza" class="close">&#10006;</button>
     <div class="card orange darken-3 bill-card">
       <div class="card-content white-text">
         <div class="card-header">
@@ -15,7 +16,7 @@
               </th>
             </tr>
           </thead>
-          <thead>
+          <thead v-if="stockDate">
             <tr>
               <th>Акция до</th>
               <th>
@@ -48,7 +49,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-//import message from '@/utils/message'
+
 export default {
   name: 'CardPizza',
   props: {
@@ -63,19 +64,33 @@ export default {
   },
   data: () => ({
     composition: [],
-    userId: null
+    userId: null,
+    admin: false
   }),
   async mounted() {
     this.userId = await this.$store.dispatch('getUserId')
     if (this.userId) {
       await this.$store.dispatch('getUserName', this.userId)
     }
+    this.admin = this.userId === 'bzo0LtSp1uYJUEE8f5nFI2VPPTG2'
   },
   methods: {
+    async deletePizza() {
+      try {
+        await this.$store.dispatch('deletePizza', {
+          collection: this.stockDate === null ? 'pizza' : 'stock',
+          name: this.name
+        })
+        console.log('удалено', this.name)
+        this.$emit('remove-refresh')
+      } catch (e) {
+        throw new Error(e)
+      }
+    },
     async getPizzaComposition() {
       await this.$store
         .dispatch('getPizzaComposition', {
-          collection: this.stockDate === 'Истек' ? 'pizza' : 'stock',
+          collection: this.stockDate === null ? 'pizza' : 'stock',
           name: this.name
         })
         .then(res => {
@@ -101,7 +116,6 @@ export default {
           date: new Intl.DateTimeFormat('ru-RU', options).format(new Date())
         }
       ]
-      console.log(orderData)
       await this.$store.dispatch('addOrder', orderData)
       await this.$router.push('/history?message=addOrder')
     }
@@ -110,6 +124,10 @@ export default {
 </script>
 
 <style scoped>
+.card-wrapper {
+  position: relative;
+}
+
 .card-img {
   max-width: 270px;
   min-width: 100px;
@@ -145,6 +163,19 @@ export default {
 
 img {
   width: 100%;
+}
+
+.close {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 9;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  line-height: 1;
+  color: white;
+  cursor: pointer;
 }
 @media (max-width: 992px) {
   .card-content__bottom {
