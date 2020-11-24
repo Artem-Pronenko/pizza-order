@@ -21,7 +21,7 @@
           </a>
 
           <ul id="dropdown" class="dropdown-content">
-            <li>
+            <li v-if="accountConnect">
               <router-link to="/profile" class="black-text">
                 <i class="material-icons">account_circle</i>Профиль
               </router-link>
@@ -29,7 +29,8 @@
             <li class="divider" tabindex="-1"></li>
             <li>
               <a href="#" class="black-text" @click.prevent="logOut">
-                <i class="material-icons">assignment_return</i>{{ accountText }}
+                <i class="material-icons">assignment_return</i
+                >{{ accountConnect ? 'Выйти' : 'Войти' }}
               </a>
             </li>
           </ul>
@@ -51,8 +52,8 @@ export default {
   }),
   computed: {
     ...mapGetters(['getName']),
-    accountText() {
-      return this.getName ? 'Выйти' : 'Войти'
+    accountConnect() {
+      return this.getName
     }
   },
   methods: {

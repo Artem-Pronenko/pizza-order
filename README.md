@@ -1,4 +1,4 @@
-# crm-vm
+# order-pizza
 
 ## Project setup
 ```
