@@ -1,7 +1,7 @@
 <template>
-  <div class="col s12 m10 l8 card-wrapper">
+  <div class="col s12 m10 l8 card-wrapper card-pizza">
     <button v-if="admin" @click="deletePizza" class="close">&#10006;</button>
-    <div class="card orange darken-3 bill-card">
+    <div class="card deep-purple lighten-2 bill-card card-pizza-content">
       <div class="card-content white-text">
         <div class="card-header">
           <span class="card-title">{{ name }}</span>
@@ -38,7 +38,10 @@
               Состав
             </button>
           </div>
-          <ul v-if="composition.length" class="composition">
+          <ul
+            v-if="composition.length"
+            class="composition deep-purple lighten-4"
+          >
             <li v-for="(item, i) in composition" :key="i">- {{ item }}</li>
           </ul>
         </div>
@@ -72,7 +75,7 @@ export default {
     if (this.userId) {
       await this.$store.dispatch('getUserName', this.userId)
     }
-    this.admin = this.userId === 'bzo0LtSp1uYJUEE8f5nFI2VPPTG2'
+    this.admin = this.userId === 'TzpIYdPOGrVFRwHK0YjJ2t3eVBz1'
   },
   methods: {
     async deletePizza() {
@@ -123,27 +126,37 @@ export default {
 }
 </script>
 
-<style scoped>
-.card-wrapper {
-  position: relative;
-}
+<style scoped lang="scss">
+.card {
+  &-pizza {
+    box-shadow: 21px 17px 42px -15px rgba(0, 0, 0, 0.75);
+    padding: 0;
 
-.card-img {
-  max-width: 270px;
-  min-width: 100px;
+    &-content {
+      margin: 0;
+    }
+  }
+
+  &-wrapper {
+    position: relative;
+  }
+
+  &-img {
+    max-width: 270px;
+    min-width: 100px;
+  }
+
+  &-content__bottom {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .composition {
-  background: antiquewhite;
   padding: 5px 10px;
 }
 
 .buttons {
-  display: flex;
-  justify-content: space-between;
-}
-
-.card-content__bottom {
   display: flex;
   justify-content: space-between;
 }
@@ -177,6 +190,7 @@ img {
   color: white;
   cursor: pointer;
 }
+
 @media (max-width: 992px) {
   .card-content__bottom {
     flex-direction: column;

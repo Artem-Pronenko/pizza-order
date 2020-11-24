@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card" @submit.prevent="onsubmit">
     <div class="card-content">
-      <span class="card-title">Домашняя бухгалтерия</span>
+      <span class="card-title">Доставка пиццы</span>
       <div class="input-field">
         <input
           id="email"

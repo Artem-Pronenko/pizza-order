@@ -1,22 +1,22 @@
 <template>
-  <nav class="navbar orange lighten-1">
+  <nav class="navbar deep-purple lighten-1">
     <div class="nav-wrapper">
       <div class="navbar-left">
         <a href="#" @click.prevent="$emit('clickMenu')">
-          <i class="material-icons black-text">dehaze</i>
+          <i class="material-icons">dehaze</i>
         </a>
-        <span class="black-text">{{ date | date('datetime') }}</span>
+        <span>{{ date | date('datetime') }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
         <li>
           <a
-            class="dropdown-trigger black-text"
+            class="dropdown-trigger"
             href="#"
             data-target="dropdown"
             ref="dropdown"
           >
-            {{ getName }}
+            {{ getName ? getName : 'Вход' }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -29,7 +29,7 @@
             <li class="divider" tabindex="-1"></li>
             <li>
               <a href="#" class="black-text" @click.prevent="logOut">
-                <i class="material-icons">assignment_return</i>Выйти
+                <i class="material-icons">assignment_return</i>{{ accountText }}
               </a>
             </li>
           </ul>
@@ -50,7 +50,10 @@ export default {
     dropdown: null
   }),
   computed: {
-    ...mapGetters(['getName'])
+    ...mapGetters(['getName']),
+    accountText() {
+      return this.getName ? 'Выйти' : 'Войти'
+    }
   },
   methods: {
     async logOut() {

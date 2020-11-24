@@ -8,9 +8,7 @@
       :key="link.url"
       :exact="link.exact"
       :class="{ hide: link.hide }"
-      ><a href="#" class="waves-effect waves-orange pointer">{{
-        link.title
-      }}</a>
+      ><a href="#" class="waves-effect pointer">{{ link.title }}</a>
     </router-link>
   </ul>
 </template>
@@ -28,7 +26,7 @@ export default {
     if (!this.UID) {
       await this.$store.dispatch('getUserId')
     }
-    this.admin = this.UID !== 'bzo0LtSp1uYJUEE8f5nFI2VPPTG2'
+    this.admin = this.UID !== 'TzpIYdPOGrVFRwHK0YjJ2t3eVBz1'
     this.links.push({ title: 'Новая запись', url: '/record', hide: this.admin })
   },
   data: () => ({

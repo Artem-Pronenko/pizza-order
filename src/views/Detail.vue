@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col s12 m6">
           <div class="card red">
-            <div class="card-content white-text">
+            <div class="card-content deep-purple lighten-1">
               <p>Описание:</p>
               <p>Сумма:</p>
               <p>Категория:</p>

@@ -10,7 +10,7 @@
     <section>
       <h5 class="title-history">Ваши заказы</h5>
       <div class="col s12 m10 l8" v-for="(item, i) in cardInfo" :key="i">
-        <div class="card-history orange white-text">
+        <div class="card-history deep-purple lighten-1 white-text">
           <div class="card-history-img">
             <img :src="item.imgUrl" alt="" />
           </div>
@@ -28,11 +28,14 @@
           </div>
         </div>
       </div>
-      <h6 class="orange white-text card-history-warn" v-if="!UID">
+      <h6
+        class="deep-purple lighten-2 white-text card-history-warn"
+        v-if="!UID"
+      >
         Войдите или создайте акаунт
       </h6>
       <h6
-        class="orange white-text card-history-warn"
+        class="deep-purple lighten-2 white-text card-history-warn"
         v-else-if="!cardInfo.length"
       >
         Пока что у вас нет заказов

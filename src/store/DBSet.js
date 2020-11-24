@@ -24,7 +24,7 @@ export default {
         .firestore()
         .collection('order')
         .doc(object.userId)
-        .set({ orderArr })
+        .set({orderArr})
     },
     // получение имени пользователя
     async getUserName(ctx, userID) {
