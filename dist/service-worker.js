@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "https://artem-pronenko.github.io/pizza-order/precache-manifest.042d4c1d975f6665561ce14b830813a9.js"
+  "/pizza-order/dist/precache-manifest.dd5f403730be41c377180165cb9e2164.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "crm-vm"});
